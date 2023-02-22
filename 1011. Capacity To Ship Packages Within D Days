@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int shipWithinDays(vector<int>& weights, int days) {
+        int high = accumulate(weights.begin(),weights.end(),0);
+        int low=*max_element(weights.begin(),weights.end());
+        if(days==1)return high;
+        int mid;
+        while(high>low){
+            mid=(high+low)/2;
+            if(check(weights,days,mid)){
+                high=mid;
+            }else{
+                low=mid+1;
+            }
+        }
+        return low;
+    }
+private:
+    bool check(vector<int>&weights,int days,int mid){
+        int total=0;int d=1;
+        for(auto it: weights){
+            if(total+it>mid){
+                total=it;
+                d++;
+            }else{
+                total+=it;
+            }
+        }
+        if(d<=days){
+            return true;
+        }return false;
+    }
+};
