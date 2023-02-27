@@ -1,0 +1,69 @@
+/*
+// Definition for a QuadTree node.
+public class Node {
+    public bool val;
+    public bool isLeaf;
+    public Node topLeft;
+    public Node topRight;
+    public Node bottomLeft;
+    public Node bottomRight;
+
+    public Node() {
+        val = false;
+        isLeaf = false;
+        topLeft = null;
+        topRight = null;
+        bottomLeft = null;
+        bottomRight = null;
+    }
+    
+    public Node(bool _val, bool _isLeaf) {
+        val = _val;
+        isLeaf = _isLeaf;
+        topLeft = null;
+        topRight = null;
+        bottomLeft = null;
+        bottomRight = null;
+    }
+    
+    public Node(bool _val,bool _isLeaf,Node _topLeft,Node _topRight,Node _bottomLeft,Node _bottomRight) {
+        val = _val;
+        isLeaf = _isLeaf;
+        topLeft = _topLeft;
+        topRight = _topRight;
+        bottomLeft = _bottomLeft;
+        bottomRight = _bottomRight;
+    }
+}
+*/
+
+public class Solution {
+    private Node dfs(int[][] grid, int r, int c, int n) {
+        if (n == 1) {
+            return new Node(grid[r][c] == 1, true);
+        }
+        bool allsame = true;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[r][c] != grid[r + i][c + j]) {
+                    allsame = false;
+                    break;
+                }
+            }
+        }
+
+        if (allsame) {
+            return new Node(grid[r][c] == 1, true);
+        }
+        n = n / 2;
+        Node topleft = dfs(grid, r, c, n);
+        Node topright = dfs(grid, r, c + n, n);
+        Node bottomleft = dfs(grid, r + n, c, n);
+        Node bottomright = dfs(grid, r + n, c + n, n);
+        return new Node(true, false, topleft, topright, bottomleft, bottomright);
+    }
+
+    public Node Construct(int[][] grid) {
+        return dfs(grid, 0, 0, grid[0].Length);
+    }
+}
