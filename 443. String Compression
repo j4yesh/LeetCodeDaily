@@ -1,0 +1,26 @@
+
+int compress(vector<char>&chars) {
+        int cnt=1;
+        string ans; int i;
+        for(i=1;i<=chars.size();i++){
+            if(i<chars.size() && chars[i]==chars[i-1]){
+                cnt++;
+            }else{
+                if(cnt==1){
+                    ans+=chars[i-1];
+                }else{
+                    ans+=chars[i-1];
+                    ans+=to_string(cnt);
+                }
+                cnt=1;
+            }
+        }
+        cout<<ans<<'\n';
+        chars.clear();
+
+        for(int i=0;i<ans.size();i++){
+            chars.push_back(ans[i]);
+        }
+
+        return chars.size();
+    }
