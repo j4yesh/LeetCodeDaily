@@ -1,0 +1,17 @@
+int strStr(string haystack, string needle) {
+        if(haystack==needle)return 0;
+        int m=haystack.length();
+        int n=needle.length();
+        int i=0;
+        int j=n;
+        
+        while((i+1<=m)){
+            cout<<haystack.substr(i,n)<<'\n';
+            if(haystack.substr(i,n)==needle){
+                return i;
+            }
+            i++;
+        }
+
+        return -1;
+    }
