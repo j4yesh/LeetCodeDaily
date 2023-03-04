@@ -1,0 +1,27 @@
+long long countSubarrays(vector<int>& nums, int minK, int maxK) {
+        long long cnt=0;
+        int minindex=-1,maxindex=-1;
+        bool mini=false,maxi=false;//present or not basically bool values
+        int start=0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]<minK || nums[i]>maxK){
+                mini=false; maxi=false;
+                start=i+1;
+            }
+            if(nums[i]==minK){
+                minindex=i;
+                mini=true;
+            }
+            if(nums[i]==maxK){
+                maxindex=i;
+                maxi=true;
+            }
+            if(mini && maxi){
+                cnt+=(min(minindex,maxindex)-start+1);
+            }
+            // No. of possible subarray = N-n+1;
+            // where, N is size of array
+            //        n is required size of comb. array
+        }
+            return cnt;
+    }
