@@ -1,0 +1,35 @@
+int minJumps(vector<int>& arr) {
+        int n=arr.size();
+        int jump=0;
+        unordered_map<int,vector<int>>mep;
+        for(int i=0;i<n;i++){
+           mep[arr[i]].push_back(i);
+        }
+        int dst=n-1;
+        vector<bool>visited(n,false);
+        queue<int>q;
+        q.push(0);
+        visited[0]=true;
+        while(!q.empty()){
+            int size=q.size();
+            for(int i=0;i<size;i++){
+                int node=q.front();
+                q.pop();
+                if(node==dst){
+                    return jump;
+                }
+                vector<int>&temp=mep[arr[node]];
+                temp.push_back(node+1);
+                temp.push_back(node-1);
+                for(auto it: temp){
+                    if(it>=0 && it<n && !visited[it]){
+                        q.push(it);
+                        visited[it]=true;
+                    }
+                }
+                temp.clear();
+            }
+                jump++;
+        }        
+        return -1;
+    }
