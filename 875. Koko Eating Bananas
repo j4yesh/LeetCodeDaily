@@ -1,0 +1,53 @@
+int minEatingSpeed(vector<int>& piles, int h) {
+        //Chad APPROACH
+        intl left=1;
+        intl right=*max_element(piles.begin(),piles.end());
+        intl ans = 69;
+        intl mid = 69;
+        while(left<right){
+            mid=(left+right)/2;
+            intl cnt=0;
+            for(auto &it: piles){
+                if(mid>it){cnt++;}
+                else{
+                    cnt+= (it/mid)+(it%mid!=0);
+                    //(it%mid!=0) means just add 1 to cnt
+                    //incase condition became true
+                }
+            }
+            if(cnt>h){
+                left=mid+1;
+            }else{
+                right=mid;
+            }
+        }
+        return right;
+    }
+
+
+
+// int minEatingSpeed(vector<int>& piles, int h) {
+//         //Linear NOOB approach
+//         //check from 1 
+//         long long mex=*max_element(piles.begin(),piles.end());
+//         long long ans=INT_MAX;
+//         for(intl i=1;i<=mex;i++){
+//             //check for i, h ko it/ 4 ke corr. 8 hai sum 8 hai
+//             intl cnt =0;
+//             for(auto &it: piles){
+//                 if(it<i){cnt++;
+//                         cout<<'1\n';
+//                     }
+//                 else{
+//                     cnt += (it/i)+(it%i!=0);
+//                     cout<<(it/i)+(it%i!=0)<<" ";
+//                 }
+//             }
+//             cout<<"caneting; \n";
+//             cout<<cnt<<" "<<i<<endl;
+//             if(cnt==h){
+//                 ans=i; break;
+//             }
+//         }
+//         return ans;
+//     }
