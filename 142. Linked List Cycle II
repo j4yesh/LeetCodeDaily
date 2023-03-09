@@ -1,0 +1,13 @@
+ListNode *detectCycle(ListNode *head) {
+        unordered_map<ListNode*,int>mep;
+        ListNode *h=head;
+        while(h != NULL && mep[h] != 1) {
+        mep[h] = 1;
+        h = h->next;
+        }
+        if(h != NULL) {
+            return h;
+        }
+
+        return NULL;
+    }
