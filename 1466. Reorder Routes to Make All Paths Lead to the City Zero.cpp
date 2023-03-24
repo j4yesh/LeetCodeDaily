@@ -18,7 +18,7 @@ public:
         visited[0]=true;
         while(!q.empty()){
             int cur=q.front();
-            q.pop(); //prev ko chodke dusre ko denote krna
+            q.pop(); 
             for(auto it: adj[cur]){
                 if(!visited[it.first]){
                     if(it.second==outgoing){
