@@ -3,7 +3,7 @@ public:
     int minPathSum(vector<vector<int>>& grid) {
         int m=grid.size();
         int n=grid[0].size();
-        vector<vector<int>> met(m, vector<int>(n)); //n size ka aur sbko sec assign hai
+        vector<vector<int>> met(m, vector<int>(n)); 
         met[0][0]=grid[0][0];
         for(int i=1;i<n;i++){
             met[0][i]=met[0][i-1]+grid[0][i];
